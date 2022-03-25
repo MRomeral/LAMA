@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.lavadomanos">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcherapp"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcherapp_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.LavadoManos">
+        <activity
+            android:name=".recomLM"
+            android:exported="false" />
+        <activity
+            android:name=".recomFM"
+            android:exported="false" />
+        <activity
+            android:name=".Guantes"
+            android:exported="false" />
+        <activity
+            android:name=".FM"
+            android:exported="false" />
+        <activity
+            android:name=".LM"
+            android:exported="false" />
+        <activity
+            android:name=".OmisionHM"
+            android:exported="false" />
+        <activity
+            android:name=".Grabar"
+            android:exported="false" />
+        <activity
+            android:name=".Formulario2"
+            android:exported="false" />
+        <activity
+            android:name=".AcercaDe"
+            android:exported="false" />
+        <activity
+            android:name=".Recomendaciones"
+            android:exported="false" />
+        <activity
+            android:name=".Formulario"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

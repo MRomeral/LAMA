@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Formulario">
+
+    <Button
+        android:id="@+id/botonSigForm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Siguiente"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.853"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
+
+    <Spinner
+        android:id="@+id/spObservados"
+        android:layout_width="183dp"
+        android:layout_height="26dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.787" />
+
+    <TextView
+        android:id="@+id/tObservadores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Número de Observados"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/spObservados"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.171"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spObservados"
+        app:layout_constraintVertical_bias="0.779" />
+
+    <TextView
+        android:id="@+id/tSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Número de Sesión"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/spSesion"
+        app:layout_constraintStart_toStartOf="@+id/tObservadores"
+        app:layout_constraintTop_toTopOf="@+id/spSesion"
+        app:layout_constraintVertical_bias="0.707" />
+
+    <EditText
+        android:id="@+id/rServicio"
+        android:layout_width="181dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/tServicio"
+        app:layout_constraintStart_toStartOf="@+id/rCentro"
+        app:layout_constraintTop_toTopOf="@+id/tServicio"
+        app:layout_constraintVertical_bias="0.625"
+        android:hint="Introduce el servicio"/>
+
+    <EditText
+        android:id="@+id/rPabellon"
+        android:layout_width="181dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/tPabellon"
+        app:layout_constraintStart_toStartOf="@+id/rServicio"
+        app:layout_constraintTop_toTopOf="@+id/tPabellon"
+        app:layout_constraintVertical_bias="0.541"
+        android:hint="Introduce el pabellón"/>
+
+    <EditText
+        android:id="@+id/rDepartamento"
+        android:layout_width="181dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/tDepartamento"
+        app:layout_constraintStart_toStartOf="@+id/rPabellon"
+        app:layout_constraintTop_toTopOf="@+id/tDepartamento"
+        app:layout_constraintVertical_bias="0.333"
+        android:hint="Introduce el depart."/>
+
+    <TextView
+        android:id="@+id/tDepartamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Departamento"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tPeriodo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.511" />
+
+    <TextView
+        android:id="@+id/tPabellon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pabellón"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tDepartamento"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.422" />
+
+    <TextView
+        android:id="@+id/tServicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Servicio"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tPabellon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.321" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FORMULARIO"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.099" />
+
+    <Button
+        android:id="@+id/botonVolverForm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Volver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
+
+    <TextView
+        android:id="@+id/tCentro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Centro"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tServicio"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.217" />
+
+    <EditText
+        android:id="@+id/rCentro"
+        android:layout_width="181dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/tCentro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.712"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tCentro"
+        android:hint="Introduce el centro"/>
+
+    <TextView
+        android:id="@+id/tPeriodo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Número de Periodo"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tSesion"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.627" />
+
+    <Spinner
+        android:id="@+id/spPeriodo"
+        android:layout_width="223dp"
+        android:layout_height="23dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tPeriodo"
+        app:layout_constraintEnd_toEndOf="@+id/spSesion"
+        app:layout_constraintTop_toTopOf="@+id/tPeriodo"
+        app:layout_constraintVertical_bias="0.629" />
+
+    <Spinner
+        android:id="@+id/spSesion"
+        android:layout_width="223dp"
+        android:layout_height="23dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/spObservados"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.704" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
