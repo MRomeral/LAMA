@@ -42,7 +42,8 @@
         app:layout_constraintEnd_toStartOf="@+id/botonRecomendaciones"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Titulo"
-        app:srcCompat="@mipmap/ic_form" />
+        app:srcCompat="@mipmap/ic_form"
+        android:background="@null"/>
 
     <ImageButton
         android:id="@+id/botonRecomendaciones"
@@ -57,12 +58,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/botonFormulario"
         app:layout_constraintTop_toBottomOf="@+id/Titulo"
-        app:srcCompat="@mipmap/ic_recommendation" />
+        app:srcCompat="@mipmap/ic_recommendation"
+        android:background="@null"/>
 
     <ImageButton
         android:id="@+id/botonAcerca"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_marginStart="173dp"
         android:layout_marginTop="522dp"
         android:layout_marginEnd="50dp"
@@ -74,6 +76,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Titulo"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@mipmap/ic_gears" />
+        app:srcCompat="@mipmap/ic_gears"
+        android:background="@null"/>
+
+    <ImageButton
+        android:id="@+id/botonAyuda"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.196"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.953"
+        app:srcCompat="@mipmap/ic_help256"
+        android:background="@null"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

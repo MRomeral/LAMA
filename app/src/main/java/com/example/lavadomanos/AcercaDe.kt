@@ -6,15 +6,24 @@ import android.os.Bundle
 import android.widget.Button
 
 class AcercaDe : AppCompatActivity() {
+    lateinit var bVolver : Button
+    lateinit var bPrueba : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_acerca_de)
 
-        val bVolver = findViewById<Button>(R.id.botonVolverAcerca)
+        //Botones
+        bVolver = findViewById(R.id.botonVolverAcerca)
+        bPrueba = findViewById(R.id.bPrueba)
+
         bVolver.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
+        bPrueba.setOnClickListener{
+            val intent = Intent(this, Prueba::class.java)
+            startActivity(intent)
+        }
     }
 }

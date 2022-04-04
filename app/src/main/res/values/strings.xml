@@ -146,4 +146,13 @@
     <string-array name="municipios01">
 
     </string-array>
+
+    <string name="lorem"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur volutpat ipsum sit amet est pellentesque congue.
+        Vestibulum volutpat dictum diam, in vestibulum odio sollicitudin sit amet. Nam quis tortor quis risus dapibus sodales et nec arcu. Donec efficitur massa enim, ac congue ipsum pretium vehicula.
+        Nunc vitae scelerisque arcu, eget tincidunt ex. Morbi porttitor justo ipsum, varius finibus leo volutpat venenatis. Etiam id sem nulla.
+        Etiam justo erat, efficitur nec enim eget, mollis interdum sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla viverra diam ac faucibus aliquam.
+        In hac habitasse platea dictumst. Vestibulum sit amet diam sit amet arcu fringilla auctor. Quisque sed mauris urna.
+        Praesent ultrices leo enim, sit amet porttitor mi porta eget. Etiam vel diam id tellus rutrum consectetur.
+        Nulla ultricies, elit nec mattis sodales, mauris ex aliquam sem, porttitor hendrerit velit est pulvinar sapien. Praesent sapien metus, laoreet quis risus ac, feugiat hendrerit felis. Duis vel tempor mauris.
+    </string>
 </resources>

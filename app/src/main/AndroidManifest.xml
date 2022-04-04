@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lavadomanos">
 
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcherapp"
@@ -10,13 +16,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LavadoManos">
         <activity
+            android:name=".Prueba"
+            android:exported="false" />
+        <activity
+            android:name=".Guantes"
+            android:exported="false" />
+        <activity
+            android:name=".resumenLM"
+            android:exported="false" />
+        <activity
+            android:name=".resumenFM"
+            android:exported="false" />
+        <activity
+            android:name=".Ayuda"
+            android:exported="false" />
+        <activity
             android:name=".recomLM"
             android:exported="false" />
         <activity
             android:name=".recomFM"
-            android:exported="false" />
-        <activity
-            android:name=".Guantes"
             android:exported="false" />
         <activity
             android:name=".FM"

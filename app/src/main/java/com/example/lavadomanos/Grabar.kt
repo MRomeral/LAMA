@@ -70,6 +70,7 @@ class Grabar : AppCompatActivity() {
                         if(spSubcat != null){
                             val adapter = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item,subAux)
                             spSubcat.adapter = adapter
+                            subcat = " "
                         }
                     }else if(position == 3){
                         val subMed = resources.getStringArray(R.array.subMedico)
@@ -168,6 +169,9 @@ class Grabar : AppCompatActivity() {
         //Datos que pasamos por el bundle
         var rCentro = ""
         var rServicio = ""
+        var per = ""
+        var ses = ""
+        var observ = ""
         var rFecha = ""
         var rHoraIni = ""
         var rHoraFin = ""
@@ -179,42 +183,79 @@ class Grabar : AppCompatActivity() {
             rFecha = "${bundle.getString("fecha")}"//Datos de la fecha
             rHoraIni = "${bundle.getString("horaInicio")}"//Datos de la hora de inicio
             rHoraFin = "${bundle.getString("horaFin")}"//Datos de la hora de fin
+            per = "${bundle.getString("periodo")}"//Datos del periodo
+            ses = "${bundle.getString("sesion")}"//Datos de la sesión
+            observ = "${bundle.getString("observados")}"//Datos de los observados
         }
 
         //Acciones asociadas a los botones
         //Envía a la función de FM
         bAlcohol.setOnClickListener{
+            val intent = Intent(this,FM::class.java)
+            startActivity(intent)
             Toast.makeText(this,"Frotado de Manos con Gel Hidroalcohólico",Toast.LENGTH_SHORT).show()
         }
 
         //Envía a la función de LM
         bJabon.setOnClickListener{
+            val intent = Intent(this,LM::class.java)
+            startActivity(intent)
             Toast.makeText(this,"Lavado de Manos con Agua y Jabón",Toast.LENGTH_SHORT).show()
         }
 
         //Envía a la función de Guantes
         bGuantes.setOnClickListener{
-            Toast.makeText(this,"Higiene con guantes",Toast.LENGTH_SHORT).show()
+            if(categoria.isNotEmpty() && subcat.isNotEmpty() && indicacion.isNotEmpty()){
+                val intent = Intent(this,Guantes::class.java)
+                var mensaje = "Categoría profesional: " + categoria.toString() + ", "
+                //Envío de datos a la pantalla siguiente
+                val bundle = Bundle()
+                bundle.putString("centro", rCentro)
+                bundle.putString("servicio", rServicio)
+                bundle.putString("periodo",per)
+                bundle.putString("sesion",ses)
+                bundle.putString("observados",observ)
+                bundle.putString("fecha", rFecha)
+                bundle.putString("horaInicio",rHoraIni)
+                bundle.putString("horaFin",rHoraFin)
+                bundle.putString("categoria",categoria)
+                bundle.putString("subcategoria",subcat)
+                bundle.putString("indicacion",indicacion)
+                intent.putExtras(bundle)
+
+                startActivity(intent)//Manda a la siguiente pantalla
+                Toast.makeText(this,"Higiene con guantes",Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this,"No se han rellenado los campos requeridos.",Toast.LENGTH_LONG).show()
+            }
         }
 
         //Envía a la función de Omisión
         bOmision.setOnClickListener{
-            var intent = Intent(this,OmisionHM::class.java)
-            var mensaje = "Categoría profesional: " + categoria.toString() + ", "
-            //Envío de datos a la pantalla siguiente
-            val bundle = Bundle()
-            bundle.putString("centro", rCentro.toString())
-            bundle.putString("servicio", rServicio.toString())
-            bundle.putString("fecha", rFecha.toString())
-            bundle.putString("horaInicio",rHoraIni.toString())
-            bundle.putString("horaFin",rHoraFin.toString())
-            bundle.putString("categoria",categoria.toString())
-            bundle.putString("subcategoria",subcat.toString())
-            bundle.putString("indicacion",indicacion.toString())
-            intent.putExtras(bundle)
+            if(categoria.isNotEmpty() && subcat.isNotEmpty() && indicacion.isNotEmpty()){
+                var intent = Intent(this,OmisionHM::class.java)
+                var mensaje = "Categoría profesional: " + categoria.toString() + ", "
+                //Envío de datos a la pantalla siguiente
+                val bundle = Bundle()
+                bundle.putString("centro", rCentro)
+                bundle.putString("servicio", rServicio)
+                bundle.putString("periodo",per)
+                bundle.putString("sesion",ses)
+                bundle.putString("observados",observ)
+                bundle.putString("fecha", rFecha)
+                bundle.putString("horaInicio",rHoraIni)
+                bundle.putString("horaFin",rHoraFin)
+                bundle.putString("categoria",categoria)
+                bundle.putString("subcategoria",subcat)
+                bundle.putString("indicacion",indicacion)
+                intent.putExtras(bundle)
 
-            startActivity(intent)//Manda a la siguiente pantalla
-            Toast.makeText(this,"Omisión. NO HAY HIGIENE DE MANOS.",Toast.LENGTH_SHORT).show()
+                startActivity(intent)//Manda a la siguiente pantalla
+                Toast.makeText(this,"Omisión. NO HAY HIGIENE DE MANOS.",Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this,"No se han rellenado los campos requeridos.",Toast.LENGTH_LONG).show()
+            }
+
         }
     }
 }

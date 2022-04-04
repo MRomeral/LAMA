@@ -14,21 +14,33 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Botones
         val bFormulario = findViewById<ImageButton>(R.id.botonFormulario)
+        val bRecomendaciones = findViewById<ImageButton>(R.id.botonRecomendaciones)
+        val bAcerca = findViewById<ImageButton>(R.id.botonAcerca)
+        val bAyuda = findViewById<ImageButton>(R.id.botonAyuda)
+
+        //Botón que lleva al Formulario para realizar una grabación
         bFormulario.setOnClickListener{
             val intent = Intent(this, Formulario::class.java)
             startActivity(intent)
         }
 
-        val bRecomendaciones = findViewById<ImageButton>(R.id.botonRecomendaciones)
+        //Botón que lleva a las recomendaciones y protocolos
         bRecomendaciones.setOnClickListener{
             val intent = Intent(this, Recomendaciones::class.java)
             startActivity(intent)
         }
 
-        val bAcerca = findViewById<ImageButton>(R.id.botonAcerca)
+        //Botón que lleva al "Acerca de"
         bAcerca.setOnClickListener{
             val intent = Intent(this, AcercaDe::class.java)
+            startActivity(intent)
+        }
+
+        //Botón que lleva a la ayuda
+        bAyuda.setOnClickListener{
+            val intent = Intent(this,Ayuda::class.java)
             startActivity(intent)
         }
     }

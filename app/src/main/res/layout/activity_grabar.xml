@@ -59,7 +59,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.756"
-        app:srcCompat="@mipmap/ic_omision256" />
+        app:srcCompat="@mipmap/ic_omision256"
+        android:background="@null"/>
 
     <ImageButton
         android:id="@+id/bAlcohol"
@@ -72,7 +73,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.497"
-        app:srcCompat="@mipmap/ic_alcohol256" />
+        app:srcCompat="@mipmap/ic_alcohol256"
+        android:background="@null"/>
 
     <ImageButton
         android:id="@+id/bJabon"
@@ -85,7 +87,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.497"
-        app:srcCompat="@mipmap/ic_jabon256" />
+        app:srcCompat="@mipmap/ic_jabon256"
+        android:background="@null"/>
 
     <ImageButton
         android:id="@+id/bGuantes"
@@ -98,7 +101,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.756"
-        app:srcCompat="@mipmap/ic_gloves256" />
+        app:srcCompat="@mipmap/ic_gloves256"
+        android:background="@null"/>
 
     <Button
         android:id="@+id/bVolverGrabar"

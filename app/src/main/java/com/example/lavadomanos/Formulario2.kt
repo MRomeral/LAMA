@@ -58,11 +58,17 @@ class Formulario2 : AppCompatActivity() {
         //Datos que se pasan por el bundle pantalla por pantalla
         var rCentro = ""
         var rServicio = ""
+        var per = ""
+        var ses = ""
+        var observ = ""
         //Datos recibidos de la pantalla anterior
         val bundle = intent.extras
         if (bundle != null) {
             rCentro = "${bundle.getString("centro")}"
             rServicio = "${bundle.getString("servicio")}"
+            per = "${bundle.getString("periodo")}"
+            ses = "${bundle.getString("sesion")}"
+            observ = "${bundle.getString("observados")}"
         }
 
         //Botón de Volver a la pantalla anterior
@@ -77,13 +83,17 @@ class Formulario2 : AppCompatActivity() {
 
         //Pasar a la siguiente pantalla
         bSiguiente.setOnClickListener {
-            if(rFecha.getText().isNotEmpty() && rHoraIni.getText().isNotEmpty() && rHoraFin.getText().isNotEmpty()){
+            if(rFecha.getText().isNotEmpty() && rHoraIni.getText().isNotEmpty() && rHoraFin.getText().isNotEmpty()
+               /* && rHoraIni.compareTo(rHoraFin)*/){
                 val intent = Intent(this, Grabar::class.java)
 
                 //Envío de datos a la pantalla siguiente
                 val bundle = Bundle()
-                bundle.putString("centro", rCentro.toString())
-                bundle.putString("servicio", rServicio.toString())
+                bundle.putString("centro", rCentro)
+                bundle.putString("servicio", rServicio)
+                bundle.putString("periodo",per)
+                bundle.putString("sesion",ses)
+                bundle.putString("observados",observ)
                 bundle.putString("fecha", rFecha.text.toString())
                 bundle.putString("horaInicio",rHoraIni.text.toString())
                 bundle.putString("horaFin",rHoraFin.text.toString())
@@ -128,14 +138,6 @@ class Formulario2 : AppCompatActivity() {
     private fun onTimeSelectedFin(time:String){
         rHoraFin.setText("$time")
     }
-/*
-    private fun isDateValid(myDate: String) : Boolean{
-        try{
-            val date = SimpleDateFormat("dd-MM-yyyy").parse(myDate)
-        }catch(ignored : java.text.ParseException){
-            return false
-        }
-    }*/
 
     //Comparar fechas
     private fun compararFechas() : Boolean{
