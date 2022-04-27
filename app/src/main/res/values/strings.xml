@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LavadoManos</string>
+    <string name="app_name">LaMa</string>
 
     <string-array name="Sesiones">
         <item>Elige sesión</item>

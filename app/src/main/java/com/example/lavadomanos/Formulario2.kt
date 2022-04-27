@@ -58,14 +58,19 @@ class Formulario2 : AppCompatActivity() {
         //Datos que se pasan por el bundle pantalla por pantalla
         var rCentro = ""
         var rServicio = ""
+        var rPabellon = ""
+        var rDepartamento = ""
         var per = ""
         var ses = ""
         var observ = ""
+
         //Datos recibidos de la pantalla anterior
         val bundle = intent.extras
         if (bundle != null) {
             rCentro = "${bundle.getString("centro")}"
             rServicio = "${bundle.getString("servicio")}"
+            rPabellon = "${bundle.getString("pabellon")}"
+            rDepartamento = "${bundle.getString("departamento")}"
             per = "${bundle.getString("periodo")}"
             ses = "${bundle.getString("sesion")}"
             observ = "${bundle.getString("observados")}"
@@ -91,6 +96,8 @@ class Formulario2 : AppCompatActivity() {
                 val bundle = Bundle()
                 bundle.putString("centro", rCentro)
                 bundle.putString("servicio", rServicio)
+                bundle.putString("pabellon", rPabellon)
+                bundle.putString("departamento", rDepartamento)
                 bundle.putString("periodo",per)
                 bundle.putString("sesion",ses)
                 bundle.putString("observados",observ)

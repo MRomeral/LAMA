@@ -169,6 +169,8 @@ class Grabar : AppCompatActivity() {
         //Datos que pasamos por el bundle
         var rCentro = ""
         var rServicio = ""
+        var rPabellon = ""
+        var rDepartamento = ""
         var per = ""
         var ses = ""
         var observ = ""
@@ -180,6 +182,8 @@ class Grabar : AppCompatActivity() {
         if(bundle != null){
             rCentro = "${bundle.getString("centro")}"//Datos del centro
             rServicio = "${bundle.getString("servicio")}"//Datos del servicio
+            rPabellon = "${bundle.getString("pabellon")}"//Datos del servicio
+            rDepartamento = "${bundle.getString("departamento")}"//Datos del servicio
             rFecha = "${bundle.getString("fecha")}"//Datos de la fecha
             rHoraIni = "${bundle.getString("horaInicio")}"//Datos de la hora de inicio
             rHoraFin = "${bundle.getString("horaFin")}"//Datos de la hora de fin
@@ -191,16 +195,61 @@ class Grabar : AppCompatActivity() {
         //Acciones asociadas a los botones
         //Envía a la función de FM
         bAlcohol.setOnClickListener{
-            val intent = Intent(this,FM::class.java)
-            startActivity(intent)
-            Toast.makeText(this,"Frotado de Manos con Gel Hidroalcohólico",Toast.LENGTH_SHORT).show()
+            if(categoria.isNotEmpty() && subcat.isNotEmpty() && indicacion.isNotEmpty()){
+                val intent = Intent(this,FM::class.java)
+                var mensaje = "Categoría profesional: " + categoria.toString() + ", "
+                //Envío de datos a la pantalla siguiente
+                val bundle = Bundle()
+                bundle.putString("centro", rCentro)
+                bundle.putString("servicio", rServicio)
+                bundle.putString("pabellon", rPabellon)
+                bundle.putString("departamento", rDepartamento)
+                bundle.putString("periodo",per)
+                bundle.putString("sesion",ses)
+                bundle.putString("observados",observ)
+                bundle.putString("fecha", rFecha)
+                bundle.putString("horaInicio",rHoraIni)
+                bundle.putString("horaFin",rHoraFin)
+                bundle.putString("categoria",categoria)
+                bundle.putString("subcategoria",subcat)
+                bundle.putString("indicacion",indicacion)
+                intent.putExtras(bundle)
+
+                startActivity(intent)//Manda a la siguiente pantalla
+                Toast.makeText(this,"Frotado de Manos con Gel Hidroalcohólico",Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this,"No se han rellenado los campos requeridos.",Toast.LENGTH_LONG).show()
+            }
+
         }
 
         //Envía a la función de LM
         bJabon.setOnClickListener{
-            val intent = Intent(this,LM::class.java)
-            startActivity(intent)
-            Toast.makeText(this,"Lavado de Manos con Agua y Jabón",Toast.LENGTH_SHORT).show()
+            if(categoria.isNotEmpty() && subcat.isNotEmpty() && indicacion.isNotEmpty()){
+                val intent = Intent(this,LM::class.java)
+                var mensaje = "Categoría profesional: " + categoria.toString() + ", "
+                //Envío de datos a la pantalla siguiente
+                val bundle = Bundle()
+                bundle.putString("centro", rCentro)
+                bundle.putString("servicio", rServicio)
+                bundle.putString("pabellon", rPabellon)
+                bundle.putString("departamento", rDepartamento)
+                bundle.putString("periodo",per)
+                bundle.putString("sesion",ses)
+                bundle.putString("observados",observ)
+                bundle.putString("fecha", rFecha)
+                bundle.putString("horaInicio",rHoraIni)
+                bundle.putString("horaFin",rHoraFin)
+                bundle.putString("categoria",categoria)
+                bundle.putString("subcategoria",subcat)
+                bundle.putString("indicacion",indicacion)
+                intent.putExtras(bundle)
+
+                startActivity(intent)//Manda a la siguiente pantalla
+                Toast.makeText(this,"Lavado de Manos con Agua y Jabón",Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this,"No se han rellenado los campos requeridos.",Toast.LENGTH_LONG).show()
+            }
         }
 
         //Envía a la función de Guantes
@@ -212,6 +261,8 @@ class Grabar : AppCompatActivity() {
                 val bundle = Bundle()
                 bundle.putString("centro", rCentro)
                 bundle.putString("servicio", rServicio)
+                bundle.putString("pabellon", rPabellon)
+                bundle.putString("departamento", rDepartamento)
                 bundle.putString("periodo",per)
                 bundle.putString("sesion",ses)
                 bundle.putString("observados",observ)
@@ -239,6 +290,8 @@ class Grabar : AppCompatActivity() {
                 val bundle = Bundle()
                 bundle.putString("centro", rCentro)
                 bundle.putString("servicio", rServicio)
+                bundle.putString("pabellon", rPabellon)
+                bundle.putString("departamento", rDepartamento)
                 bundle.putString("periodo",per)
                 bundle.putString("sesion",ses)
                 bundle.putString("observados",observ)

@@ -87,19 +87,22 @@ class Formulario : AppCompatActivity() {
                 && ses.isNotEmpty() && observ.isNotEmpty()){
                 val intent = Intent(this, Formulario2::class.java)
                 val mensaje ="Centro: " + rCentro.getText().toString() + ", Servicio: " + rServicio.getText().toString() +
-                        " Periodo: " + per +", Sesión: " + ses +", Observados: " + observ
+                        " Periodo: " + per + "\n" + ", Sesión: " + ses +", Observados: " + observ
 
-                val bundle = Bundle()
-                bundle.putString("centro",rCentro.text.toString())
-                bundle.putString("servicio",rServicio.text.toString())
-                bundle.putString("periodo",per)
-                bundle.putString("sesion",ses)
-                bundle.putString("observados",observ)
+                //Con esto enviamos los datos a la siguiente pantalla
+                val bundle = Bundle()//Creamos el Bundle para enviar los datos
+                bundle.putString("centro",rCentro.text.toString())//Pasamos el centro insertado
+                bundle.putString("servicio",rServicio.text.toString())//Pasamos el servicio insertado
+                bundle.putString("pabellon",rPabellon.text.toString())//Pasamos el pabellón insertado
+                bundle.putString("departamento",rDepartamento.text.toString())//Pasamos el departamento insertado
+                bundle.putString("periodo",per)//Pasamos el periodo insertado
+                bundle.putString("sesion",ses)//Pasamos el sesión insertado
+                bundle.putString("observados",observ)//Pasamos el número de observados insertado
                 intent.putExtras(bundle)
 
                 startActivity(intent)//Manda a la siguiente pantalla (Formulario 2)
-                Toast.makeText(this,mensaje, Toast.LENGTH_LONG).show()
-            }else{
+                Toast.makeText(this,mensaje, Toast.LENGTH_LONG).show()//Muestra los datos insertados
+            }else{//Si no se insertan los datos no permite pasar a la siguiente pantalla
                 Toast.makeText(this,"No has insertado los campos requeridos", Toast.LENGTH_SHORT).show()
             }
 

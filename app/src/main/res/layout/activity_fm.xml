@@ -6,18 +6,103 @@
     android:layout_height="match_parent"
     tools:context=".FM">
 
-    <VideoView
-        android:id="@+id/videoView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/viewFinder"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </androidx.camera.view.PreviewView>
 
     <ImageButton
-        android:id="@+id/botonGrabar"
+        android:id="@+id/fm1a"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="100dp"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_lm1" />
+
+    <ImageButton
+        android:id="@+id/fm2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fm1a"
+        app:srcCompat="@mipmap/ic_lm2" />
+
+    <ImageButton
+        android:id="@+id/fm3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fm2"
+        app:srcCompat="@mipmap/ic_lm3" />
+
+    <ImageButton
+        android:id="@+id/fm4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fm3"
+        app:srcCompat="@mipmap/ic_lm4" />
+
+    <ImageButton
+        android:id="@+id/fm5"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fm4"
+        app:srcCompat="@mipmap/ic_lm5" />
+
+    <ImageButton
+        android:id="@+id/fm1b"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="100dp"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_lm7" />
+
+    <ImageButton
+        android:id="@+id/fm6"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fm1b"
+        app:srcCompat="@mipmap/ic_lm8" />
+
+    <ImageButton
+        android:id="@+id/fm7"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fm6"
+        app:srcCompat="@mipmap/ic_lm9" />
+
+    <ImageButton
+        android:id="@+id/fm8"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fm7"
+        app:srcCompat="@mipmap/ic_lm10" />
+
+    <ImageButton
+        android:id="@+id/bGrabarFM"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@null"
@@ -30,59 +115,25 @@
         app:layout_constraintVertical_bias="0.916"
         app:srcCompat="@mipmap/ic_grabar256" />
 
-    <TextView
-        android:id="@+id/tContadorFM"
+    <Button
+        android:id="@+id/bSiguienteFM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:alpha="0"
-        android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="#FF0000"
+        android:text="Siguiente"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08" />
-
-    <TextView
-        android:id="@+id/tTiempoFM"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.687" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/bVolverFM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
         android:text="Volver"
-        app:layout_constraintBottom_toBottomOf="@+id/videoView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.063"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.922" />
-
-    <Button
-        android:id="@+id/bSiguienteFM"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        android:text="Siguiente"
-        app:layout_constraintBottom_toBottomOf="@+id/videoView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.931"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.922" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
