@@ -1,19 +1,13 @@
 package com.example.lavadomanos
 
 
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import android.widget.*
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.Preview
@@ -22,7 +16,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.example.lavadomanos.databinding.ActivityFmBinding
-import com.example.lavadomanos.databinding.ActivityLmBinding
 import java.io.File
 import java.util.*
 import java.util.concurrent.ExecutorService
@@ -32,6 +25,7 @@ class FM : AppCompatActivity(), LifecycleOwner {
     private lateinit var bGrabarFM : ImageButton
     private lateinit var bVolverFM : Button
     private lateinit var bSiguienteFM : Button//Botón oculto hasta que no se realice la limpieza
+
 
     //Botones de acción
     lateinit var fm1a: ImageButton
@@ -59,10 +53,16 @@ class FM : AppCompatActivity(), LifecycleOwner {
     private val hora = c.get(Calendar.HOUR)
     private val minuto = c.get(Calendar.MINUTE)
     private val segundo = c.get(Calendar.SECOND)
-    private val aux = hora*3600 + minuto*60 + segundo
-    private var horaComienzo = ""
-    private var horaAux = 0
-    private var horaPulsacion = 0
+    private var auxFM = 0
+    private var horaComienzoFM = ""
+
+    private var terminadoFM = false
+    private var catProf = ""
+    private var subcat = ""
+    private var indicacion = ""
+
+    lateinit var tempFM: TextView
+    private var tiempoTotalFM = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,6 +73,9 @@ class FM : AppCompatActivity(), LifecycleOwner {
         //tContadorFM = findViewById(R.id.tContadorFM)//Inicialmente el texto está oculto
         //tTiempoFM = findViewById(R.id.tTiempoFM)//TEXTO DEL TIEMPO DE LAVADO (PRUEBA)
 
+        //Textos
+        tempFM = findViewById<TextView>(R.id.tempFM)
+
         //Permisos para la cámara
         if(allPermissionGranted()){
             startCamera()
@@ -81,6 +84,34 @@ class FM : AppCompatActivity(), LifecycleOwner {
                 this, Constants.REQUIRED_PERMISSIONS,
                 Constants.REQUEST_CODE_PERMISSIONS
             )
+        }
+
+        //Datos que pasamos por el bundle
+        var rCentro = ""
+        var rServicio = ""
+        var rPabellon = ""
+        var rDepartamento = ""
+        var per = ""
+        var ses = ""
+        var observ = ""
+        var rFecha = ""
+        var rHoraIni = ""
+        var rHoraFin = ""
+
+        val bundle = intent.extras//Obtiene todos los datos del bundle
+        if(bundle != null){
+            rCentro = "${bundle.getString("centro")}"//Datos del centro
+            rServicio = "${bundle.getString("servicio")}"//Datos del servicio
+            rPabellon = "${bundle.getString("pabellon")}"//Datos del servicio
+            rDepartamento = "${bundle.getString("departamento")}"//Datos del servicio
+            rFecha = "${bundle.getString("fecha")}"//Datos de la fecha
+            rHoraIni = "${bundle.getString("horaInicio")}"//Datos de la hora de inicio
+            rHoraFin = "${bundle.getString("horaFin")}"//Datos de la hora de fin
+            per = "${bundle.getString("periodo")}"//Datos del periodo
+            ses = "${bundle.getString("sesion")}"//Datos de la sesión
+            observ = "${bundle.getString("observados")}"//Datos de los observados
+            catProf = "${bundle.getString("categoria")}"//Datos de los observados
+            subcat = "${bundle.getString("subcategoria")}"//Datos de los observados
         }
 
 
@@ -123,116 +154,135 @@ class FM : AppCompatActivity(), LifecycleOwner {
 
         //Funcionalidad de los botones de acción
         binding.fm1a.setOnClickListener {
-            Toast.makeText(this, "Mojado de manos", Toast.LENGTH_SHORT).show()
             fm1a.isClickable = false
             fm1a.isEnabled = false
-            //horaPulsacion = "$hora:$minuto:$segundo"
-            horaAux = hora*3600 + minuto*60 + segundo
+            mostrarHoraPulsadaFM("Paso 1a")
         }
         binding.fm1b.setOnClickListener {
-            Toast.makeText(this, "fm1b", Toast.LENGTH_SHORT).show()
             fm1b.isClickable = false
             fm1b.isEnabled = false
+            mostrarHoraPulsadaFM("Paso 1b")
         }
         binding.fm2.setOnClickListener {
-            Toast.makeText(this, "fm2", Toast.LENGTH_SHORT).show()
             fm2.isClickable = false
             fm2.isEnabled = false
+            mostrarHoraPulsadaFM("Paso 2")
         }
         binding.fm3.setOnClickListener {
-            Toast.makeText(this, "Frotarse los dedos", Toast.LENGTH_SHORT).show()
             fm3.isClickable = false
             fm3.isEnabled = false
+            mostrarHoraPulsadaFM("Paso 3")
         }
         binding.fm4.setOnClickListener {
-            Toast.makeText(this, "fm4", Toast.LENGTH_SHORT).show()
             fm4.isClickable = false
             fm4.isEnabled = false
+            mostrarHoraPulsadaFM("Paso 4")
         }
         binding.fm5.setOnClickListener {
-            Toast.makeText(this, "fm5", Toast.LENGTH_SHORT).show()
             fm5.isClickable = false
             fm5.isEnabled = false
+            mostrarHoraPulsadaFM("Paso 5")
         }
         binding.fm6.setOnClickListener {
-            Toast.makeText(this, "fm6", Toast.LENGTH_SHORT).show()
             fm6.isClickable = false
             fm6.isEnabled = false
+            mostrarHoraPulsadaFM("Paso 6")
         }
         binding.fm7.setOnClickListener {
-            Toast.makeText(this, "fm7", Toast.LENGTH_SHORT).show()
             fm7.isClickable = false
             fm7.isEnabled = false
+            mostrarHoraPulsadaFM("Paso 7")
         }
         binding.fm8.setOnClickListener {
-            Toast.makeText(this, "fm8", Toast.LENGTH_SHORT).show()
             fm8.isClickable = false
             fm8.isEnabled = false
+            mostrarHoraPulsadaFM("Paso 8")
+            mostrarTiempoHigieneFM()
         }
 
         //Funcionalidad del botón de Grabar vídeo
         bGrabarFM.setOnClickListener {
-            //Los botones de acción se activan al iniciar el proceso están deshabilitados
-            fm1a.isEnabled = true
-            fm1a.isClickable = true
-            fm1b.isEnabled = true
-            fm1b.isClickable = true
-            fm2.isEnabled = true
-            fm2.isClickable = true
-            fm3.isEnabled = true
-            fm3.isClickable = true
-            fm4.isEnabled = true
-            fm4.isClickable = true
-            fm5.isEnabled = true
-            fm5.isClickable = true
-            fm6.isEnabled = true
-            fm6.isClickable = true
-            fm7.isEnabled = true
-            fm7.isClickable = true
-            fm8.isEnabled = true
-            fm8.isClickable = true
-            //grabarVideoFM()
-            /*
-            object : CountDownTimer(40000, 1000) {
-                override fun onTick(millisUntilFinished: Long) {
-                    tContadorFM.alpha = 1.0f
-                    //Hay que investigar la opción de que empiece en color rojo y cuando queden 10 segundos pasarlo a verde
-                    bGrabarFM.setImageResource(R.mipmap.ic_parargrabar256)
-                    tContadorFM.setText("" + millisUntilFinished / 1000 + " segundos.")
-                    contador++//Cada instante se le suma 1 segundo
-                    if (contador > 29) {
-
-                    }
-                }
-
-                override fun onFinish() {
-                    tContadorFM.setText("Hecho!")
-                    tTiempoFM.setText("" + contador)
-                    tTiempoFM.alpha = 1.0f//Se revela el texto del tiempo
-                }
-
-            }.start()*/
+            contarTiempoFM()
             bSiguienteFM.alpha = 1.0f//Activa el botón de siguiente que está oculto
             bSiguienteFM.isEnabled = true//Botón habilitado
             bSiguienteFM.isClickable = true//Botón habilitado
-            horaComienzo = "$hora:$minuto:$segundo"
-            horaAux = hora*3600 + minuto*60 + segundo
-            Toast.makeText(this, "Se ha iniciado la grabación, $horaComienzo", Toast.LENGTH_SHORT)
+            horaComienzoFM = "$hora:$minuto:$segundo"
+            auxFM = hora*3600 + minuto*60 + segundo
+            Toast.makeText(this, "Se ha iniciado la grabación, $horaComienzoFM", Toast.LENGTH_SHORT)
         }
 
         //Funcionalidad del botón de Volver atrás
         bVolverFM.setOnClickListener {
             val intent = Intent(this, Grabar::class.java)
+            //Envío de datos a la pantalla siguiente
+            val bundle = Bundle()
+            bundle.putString("centro", rCentro)
+            bundle.putString("servicio", rServicio)
+            bundle.putString("pabellon", rPabellon)
+            bundle.putString("departamento", rDepartamento)
+            bundle.putString("periodo",per)
+            bundle.putString("sesion",ses)
+            bundle.putString("observados",observ)
+            bundle.putString("fecha", rFecha)
+            bundle.putString("horaInicio",rHoraIni)
+            bundle.putString("horaFin",rHoraFin)
+            bundle.putString("categoria",catProf)
+            bundle.putString("subcategoria",subcat)
+            bundle.putString("indicacion",indicacion)
+            intent.putExtras(bundle)
             startActivity(intent)
         }
 
         //Funcionalidad del botón siguiente
         bSiguienteFM.setOnClickListener {
             val intent = Intent(this, resumenFM::class.java)
+            //Envío de datos a la pantalla siguiente
+            val bundle = Bundle()
+            bundle.putString("centro", rCentro)
+            bundle.putString("servicio", rServicio)
+            bundle.putString("pabellon", rPabellon)
+            bundle.putString("departamento", rDepartamento)
+            bundle.putString("periodo",per)
+            bundle.putString("sesion",ses)
+            bundle.putString("observados",observ)
+            bundle.putString("fecha", rFecha)
+            bundle.putString("horaInicio",rHoraIni)
+            bundle.putString("horaFin",rHoraFin)
+            bundle.putString("categoria",catProf)
+            bundle.putString("subcategoria",subcat)
+            bundle.putString("indicacion",indicacion)
+            intent.putExtras(bundle)
             startActivity(intent)
         }
 
         //viewFinderFM = findViewById(R.id.viewFinderFM)
+    }
+
+    private fun contarTiempoFM() {
+        //Los botones de acción se activan al iniciar el proceso están deshabilitados
+        fm1a.isEnabled = true
+        fm1a.isClickable = true
+        fm1b.isEnabled = true
+        fm1b.isClickable = true
+        fm2.isEnabled = true
+        fm2.isClickable = true
+        fm3.isEnabled = true
+        fm3.isClickable = true
+        fm4.isEnabled = true
+        fm4.isClickable = true
+        fm5.isEnabled = true
+        fm5.isClickable = true
+        fm6.isEnabled = true
+        fm6.isClickable = true
+        fm7.isEnabled = true
+        fm7.isClickable = true
+        fm8.isEnabled = true
+        fm8.isClickable = true
+
+        //Cuando empieza el proceso de higiene FM
+        horaComienzoFM = "$hora:$minuto:$segundo"
+        auxFM = hora*3600 + minuto*60 + segundo
+        Toast.makeText(this, "Ha comenzado a las $horaComienzoFM", Toast.LENGTH_SHORT).show()
     }
 
     private fun startCamera() {
@@ -272,6 +322,39 @@ class FM : AppCompatActivity(), LifecycleOwner {
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
+    }
+
+    private fun mostrarTiempoHigieneFM() {
+        if(tiempoTotalFM < 40){
+            tempFM.setTextColor(Color.parseColor("#FF0000"))
+        }else if(tiempoTotalFM > 40){
+            tempFM.setTextColor(Color.parseColor("#FF00FF0A"))
+        }
+        tempFM.text = tiempoTotalFM.toString()
+        tempFM.alpha = 1.0f
+        bSiguienteFM.alpha = 1.0f
+    }
+
+    private fun mostrarHoraPulsadaFM(paso: String) {
+
+        val c = Calendar.getInstance()
+        val dia = c.get(Calendar.DAY_OF_MONTH)
+        val mes = c.get(Calendar.MONTH)
+        val anno = c.get(Calendar.YEAR)
+        val hora = c.get(Calendar.HOUR)
+        val minuto = c.get(Calendar.MINUTE)
+        val segundo = c.get(Calendar.SECOND)
+        val auxPaso = hora*3600 + minuto*60 + segundo
+
+        Toast.makeText(this,"Se ha realizado el $paso, en el segundo: ${difHoraFM(auxFM, auxPaso)}", Toast.LENGTH_LONG).show()
+        if(paso == "Paso 8"){
+            tiempoTotalFM = difHoraFM(auxFM, auxPaso).toInt()
+            terminadoFM = true
+        }
+    }
+
+    private fun difHoraFM(horaComienzo: Int, horaPaso: Int): String {
+        return horaPaso.minus(horaComienzo).toString()
     }
 }
 

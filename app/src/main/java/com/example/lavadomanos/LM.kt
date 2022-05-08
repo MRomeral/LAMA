@@ -2,14 +2,13 @@ package com.example.lavadomanos
 
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -27,6 +26,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 
 class LM : AppCompatActivity(){
     lateinit var bGrabarLM: ImageButton
@@ -47,15 +48,19 @@ class LM : AppCompatActivity(){
     lateinit var bVolverLM: Button
 
     lateinit var tempLM: TextView
-
+    private var tiempoTotalFM = 0
 
     //Hora para saber a que hora se inicia la labor
     private val c = Calendar.getInstance()
     private val hora = c.get(Calendar.HOUR)
     private val minuto = c.get(Calendar.MINUTE)
     private val segundo = c.get(Calendar.SECOND)
-    private val aux = hora*3600 + minuto*60 + segundo
-    private var horaComienzo = ""
+    private var auxLM = 0
+    private var horaComienzoLM = ""
+    private var terminadoLM = false
+    private var categoria = ""
+    private var subcat = ""
+    private var indicacion = ""
 
     private lateinit var binding: ActivityLmBinding
     private lateinit var outputDirectory : File
@@ -114,6 +119,32 @@ class LM : AppCompatActivity(){
         lm11.isEnabled = false
         lm11.isClickable = false
 
+        //Datos que pasamos por el bundle
+        var rCentro = ""
+        var rServicio = ""
+        var rPabellon = ""
+        var rDepartamento = ""
+        var per = ""
+        var ses = ""
+        var observ = ""
+        var rFecha = ""
+        var rHoraIni = ""
+        var rHoraFin = ""
+
+        val bundle = intent.extras//Obtiene todos los datos del bundle
+        if(bundle != null){
+            rCentro = "${bundle.getString("centro")}"//Datos del centro
+            rServicio = "${bundle.getString("servicio")}"//Datos del servicio
+            rPabellon = "${bundle.getString("pabellon")}"//Datos del servicio
+            rDepartamento = "${bundle.getString("departamento")}"//Datos del servicio
+            rFecha = "${bundle.getString("fecha")}"//Datos de la fecha
+            rHoraIni = "${bundle.getString("horaInicio")}"//Datos de la hora de inicio
+            rHoraFin = "${bundle.getString("horaFin")}"//Datos de la hora de fin
+            per = "${bundle.getString("periodo")}"//Datos del periodo
+            ses = "${bundle.getString("sesion")}"//Datos de la sesión
+            observ = "${bundle.getString("observados")}"//Datos de los observados
+        }
+
 
         //Textos
         tempLM = findViewById<TextView>(R.id.tempLM)
@@ -129,66 +160,147 @@ class LM : AppCompatActivity(){
                 Constants.REQUEST_CODE_PERMISSIONS
             )
         }
-
+        //Funciones asociadas a los botones básicos
+        //Botón que inicia el proceso de grabación
         binding.bGrabarLM.setOnClickListener {
-            contarTiempo()
+            contarTiempoLM()
+
             //takePhoto()
         }
 
+
+        //Vuelve a la pantalla anterior
         binding.bVolverLM.setOnClickListener {
             val intent = Intent(this, Grabar::class.java)
+            //Envío de datos a la pantalla siguiente
+            val bundle = Bundle()
+            bundle.putString("centro", rCentro)
+            bundle.putString("servicio", rServicio)
+            bundle.putString("pabellon", rPabellon)
+            bundle.putString("departamento", rDepartamento)
+            bundle.putString("periodo",per)
+            bundle.putString("sesion",ses)
+            bundle.putString("observados",observ)
+            bundle.putString("fecha", rFecha)
+            bundle.putString("horaInicio",rHoraIni)
+            bundle.putString("horaFin",rHoraFin)
+            bundle.putString("categoria",categoria)
+            bundle.putString("subcategoria",subcat)
+            bundle.putString("indicacion",indicacion)
+            intent.putExtras(bundle)
             startActivity(intent)
         }
 
+        //Este botón se revela una vez que el usuario ha pulsado grabar
         binding.bSiguienteLM.setOnClickListener {
+            if(terminadoLM == true){
+
+            }
             val intent = Intent(this, resumenLM::class.java)
+            //Envío de datos a la pantalla siguiente
+            val bundle = Bundle()
+            bundle.putString("centro", rCentro)
+            bundle.putString("servicio", rServicio)
+            bundle.putString("pabellon", rPabellon)
+            bundle.putString("departamento", rDepartamento)
+            bundle.putString("periodo",per)
+            bundle.putString("sesion",ses)
+            bundle.putString("observados",observ)
+            bundle.putString("fecha", rFecha)
+            bundle.putString("horaInicio",rHoraIni)
+            bundle.putString("horaFin",rHoraFin)
+            bundle.putString("categoria",categoria)
+            bundle.putString("subcategoria",subcat)
+            bundle.putString("indicacion",indicacion)
+            intent.putExtras(bundle)
             startActivity(intent)
             bSiguienteLM.alpha = 0f
         }
 
         //Funcionalidad de los botones de acción
         binding.lm0.setOnClickListener {
-            Toast.makeText(this, "Mojado de manos", Toast.LENGTH_SHORT).show()
+            takePhoto()
+
+            lm0.isClickable = false
+            lm0.isEnabled = false
+            //Toast.makeText(this, "lm0", Toast.LENGTH_SHORT).show()
+            mostrarHoraPulsadaLM("Paso 0")
         }
         binding.lm1.setOnClickListener {
-
+            takePhoto()
+            lm1.isClickable = false
+            lm1.isEnabled = false
+            //Toast.makeText(this, "lm1", Toast.LENGTH_SHORT).show()
+            mostrarHoraPulsadaLM("Paso 1")
         }
         binding.lm2.setOnClickListener {
-
+            lm2.isClickable = false
+            lm2.isEnabled = false
+            mostrarHoraPulsadaLM("Paso 2")
         }
         binding.lm3.setOnClickListener {
-
+            lm3.isClickable = false
+            lm3.isEnabled = false
+            mostrarHoraPulsadaLM("Paso 3")
         }
         binding.lm4.setOnClickListener {
-
+            lm4.isClickable = false
+            lm4.isEnabled = false
+            mostrarHoraPulsadaLM("Paso 4")
         }
         binding.lm5.setOnClickListener {
-
+            lm5.isClickable = false
+            lm5.isEnabled = false
+            mostrarHoraPulsadaLM("Paso 5")
         }
         binding.lm6.setOnClickListener {
-
+            lm6.isClickable = false
+            lm6.isEnabled = false
+            mostrarHoraPulsadaLM("Paso 6")
         }
         binding.lm7.setOnClickListener {
-
+            lm7.isClickable = false
+            lm7.isEnabled = false
+            mostrarHoraPulsadaLM("Paso 7")
         }
         binding.lm8.setOnClickListener {
-
+            lm8.isClickable = false
+            lm8.isEnabled = false
+            mostrarHoraPulsadaLM("Paso 8")
         }
         binding.lm9.setOnClickListener {
-
+            lm9.isClickable = false
+            lm9.isEnabled = false
+            mostrarHoraPulsadaLM("Paso 9")
         }
         binding.lm10.setOnClickListener {
-
+            lm10.isClickable = false
+            lm10.isEnabled = false
+            mostrarHoraPulsadaLM("Paso 10")
         }
         binding.lm11.setOnClickListener {
-
+            lm11.isClickable = false
+            lm11.isEnabled = false
+            mostrarHoraPulsadaLM("Paso 11")
+            mostrarTiempoHigieneLM()
         }
     }
 
-    private fun contarTiempo() {
-        tempLM.text = "0"
+    private fun mostrarTiempoHigieneLM() {
+        if(tiempoTotalFM < 40){
+            tempLM.setTextColor(Color.parseColor("#FF0000"))
+        }else if(tiempoTotalFM > 40){
+            tempLM.setTextColor(Color.parseColor("#FF00FF0A"))
+        }
+        tempLM.text = tiempoTotalFM.toString()
         tempLM.alpha = 1.0f
         bSiguienteLM.alpha = 1.0f
+    }
+
+    private fun contarTiempoLM() {
+        bSiguienteLM.alpha = 1.0f
+        bSiguienteLM.isEnabled = true
+        bSiguienteLM.isClickable = true
         //Activa los botones de acción al iniciar el proceso
         lm0.isEnabled = true
         lm0.isClickable = true
@@ -213,9 +325,10 @@ class LM : AppCompatActivity(){
         lm11.isEnabled = true
         lm11.isClickable = true
 
-
-        horaComienzo = "$hora:$minuto:$segundo"
-        Toast.makeText(this, "Ha comenzado a las $horaComienzo", Toast.LENGTH_SHORT).show()
+        //Cuando empieza el proceso de higiene LM
+        horaComienzoLM = "$hora:$minuto:$segundo"
+        auxLM = hora*3600 + minuto*60 + segundo
+        Toast.makeText(this, "Ha comenzado a las $horaComienzoLM", Toast.LENGTH_SHORT).show()
     }
 
     private fun getOutputDirectory(): File {
@@ -308,6 +421,29 @@ class LM : AppCompatActivity(){
         super.onDestroy()
         cameraExecutor.shutdown()
     }
+
+    private fun mostrarHoraPulsadaLM(paso: String) {
+
+        val c = Calendar.getInstance()
+        val dia = c.get(Calendar.DAY_OF_MONTH)
+        val mes = c.get(Calendar.MONTH)
+        val anno = c.get(Calendar.YEAR)
+        val hora = c.get(Calendar.HOUR)
+        val minuto = c.get(Calendar.MINUTE)
+        val segundo = c.get(Calendar.SECOND)
+        val auxPaso = hora*3600 + minuto*60 + segundo
+
+        Toast.makeText(this,"Se ha realizado el $paso, en el segundo: ${difHoraLM(auxLM, auxPaso)}", Toast.LENGTH_LONG).show()
+        if(paso == "Paso 11"){
+            tiempoTotalFM = difHoraLM(auxLM, auxPaso).toInt()
+            terminadoLM = true
+        }
+    }
+
+    private fun difHoraLM(horaComienzo: Int, horaPaso: Int): String {
+        return horaPaso.minus(horaComienzo).toString()
+    }
+
 }
 
 

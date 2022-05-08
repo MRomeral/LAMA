@@ -6,6 +6,7 @@
         <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/drawable/IconoApp_background.xml" value="0.12" />
         <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/layout/activity_acerca_de.xml" value="0.35190217391304346" />
         <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/layout/activity_ayuda.xml" value="0.35190217391304346" />
+        <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/layout/activity_enviar_correo.xml" value="0.2776268115942029" />
         <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/layout/activity_fm.xml" value="0.23550724637681159" />
         <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/layout/activity_formulario.xml" value="0.35190217391304346" />
         <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/layout/activity_formulario2.xml" value="0.2871376811594203" />
@@ -16,10 +17,13 @@
         <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/layout/activity_omision_hm.xml" value="0.25" />
         <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/layout/activity_prueba.xml" value="0.2708333333333333" />
+        <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/layout/activity_prueba_vuelta.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/layout/activity_recom_fm.xml" value="0.35190217391304346" />
         <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/layout/activity_recom_lm.xml" value="0.35190217391304346" />
         <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/layout/activity_recomendaciones.xml" value="0.35190217391304346" />
+        <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/layout/activity_res_prueba_vuelta.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/layout/activity_resumen_fm.xml" value="0.24094202898550723" />
+        <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/layout/activity_resumen_lm.xml" value="0.2776268115942029" />
         <entry key="..\:/Users/romer/AndroidStudioProjects/LavadoManos/app/src/main/res/mipmap-anydpi-v26/ic_launcherapp.xml" value="0.12" />
       </map>
     </option>

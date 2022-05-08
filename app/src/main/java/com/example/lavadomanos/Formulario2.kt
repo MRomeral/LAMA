@@ -79,6 +79,19 @@ class Formulario2 : AppCompatActivity() {
         //Botón de Volver a la pantalla anterior
         bVolver.setOnClickListener {
             val intent = Intent(this, Formulario::class.java)
+            //Envío de datos a la pantalla siguiente
+            val bundle = Bundle()
+            bundle.putString("centro", rCentro)
+            bundle.putString("servicio", rServicio)
+            bundle.putString("pabellon", rPabellon)
+            bundle.putString("departamento", rDepartamento)
+            bundle.putString("periodo",per)
+            bundle.putString("sesion",ses)
+            bundle.putString("observados",observ)
+            bundle.putString("fecha", rFecha.text.toString())
+            bundle.putString("horaInicio",rHoraIni.text.toString())
+            bundle.putString("horaFin",rHoraFin.text.toString())
+            intent.putExtras(bundle)
             startActivity(intent)
         }
 

@@ -64,6 +64,7 @@
     </string-array>
 
     <string-array name="indicaciones">
+        <item>Elija indicación</item>
         <item>Antes contacto paciente</item>
         <item>Antes proc. asép.</item>
         <item>Después de expos. FC</item>

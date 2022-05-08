@@ -142,15 +142,15 @@ class Grabar : AppCompatActivity() {
             spIndicaciones.adapter = adapter
             spIndicaciones.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    if(position == 0){
-                        indicacion = indicaciones[position]
-                    }else if(position == 1){
+                    if(position == 1){
                         indicacion = indicaciones[position]
                     }else if(position == 2){
                         indicacion = indicaciones[position]
                     }else if(position == 3){
                         indicacion = indicaciones[position]
                     }else if(position == 4){
+                        indicacion = indicaciones[position]
+                    }else if(position == 5){
                         indicacion = indicaciones[position]
                     }
                 }
