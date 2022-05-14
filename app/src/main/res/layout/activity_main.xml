@@ -15,15 +15,15 @@
 
     <TextView
         android:id="@+id/Titulo"
-        android:layout_width="233dp"
-        android:layout_height="49dp"
+        android:layout_width="231dp"
+        android:layout_height="60dp"
         android:layout_marginStart="89dp"
         android:layout_marginTop="67dp"
         android:layout_marginEnd="89dp"
         android:layout_marginBottom="615dp"
-        android:text="LavadoManos"
         android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:text="LaMa App"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,8 +31,8 @@
 
     <ImageButton
         android:id="@+id/botonFormulario"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="89dp"
         android:layout_marginTop="82dp"
         android:layout_marginEnd="53dp"
@@ -47,8 +47,8 @@
 
     <ImageButton
         android:id="@+id/botonRecomendaciones"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="82dp"
         android:layout_marginEnd="89dp"
@@ -63,8 +63,8 @@
 
     <ImageButton
         android:id="@+id/botonAcerca"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="173dp"
         android:layout_marginTop="522dp"
         android:layout_marginEnd="50dp"
@@ -81,8 +81,8 @@
 
     <ImageButton
         android:id="@+id/botonAyuda"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.196"

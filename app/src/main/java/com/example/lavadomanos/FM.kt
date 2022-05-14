@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.widget.*
 import androidx.camera.core.CameraSelector
@@ -22,14 +23,14 @@ import java.util.concurrent.ExecutorService
 
 class FM : AppCompatActivity(), LifecycleOwner {
     //Variables de los botones básicos
-    private lateinit var bGrabarFM : ImageButton
-    private lateinit var bVolverFM : Button
-    private lateinit var bSiguienteFM : Button//Botón oculto hasta que no se realice la limpieza
+    private lateinit var botonGrabar : ImageButton
+    private lateinit var botonVolver : Button
+    private lateinit var botonSiguiente : Button//Botón oculto hasta que no se realice la limpieza
 
 
     //Botones de acción
-    lateinit var fm1a: ImageButton
-    lateinit var fm1b: ImageButton
+    lateinit var fm0: ImageButton
+    lateinit var fm1: ImageButton
     lateinit var fm2: ImageButton
     lateinit var fm3: ImageButton
     lateinit var fm4: ImageButton
@@ -57,12 +58,16 @@ class FM : AppCompatActivity(), LifecycleOwner {
     private var horaComienzoFM = ""
 
     private var terminadoFM = false
-    private var catProf = ""
+    private var categoriaProfesional = ""
     private var subcat = ""
     private var indicacion = ""
 
+    private var contBoton = 0
+    private var contadorTiempo = 0
+
     lateinit var tempFM: TextView
     private var tiempoTotalFM = 0
+    lateinit var countDownTimer : CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,44 +92,54 @@ class FM : AppCompatActivity(), LifecycleOwner {
         }
 
         //Datos que pasamos por el bundle
-        var rCentro = ""
-        var rServicio = ""
-        var rPabellon = ""
-        var rDepartamento = ""
-        var per = ""
-        var ses = ""
-        var observ = ""
-        var rFecha = ""
-        var rHoraIni = ""
-        var rHoraFin = ""
+        var centro = ""
+        var servicio = ""
+        var pabellon = ""
+        var departamento = ""
+        var intervencion = ""
+        var sesion = ""
+        var observados = ""
+        var fecha = ""
+        var horaInicio = ""
+        var horaFin = ""
+        var pais = ""
+        var provincia = ""
+        //Variable que distingue tipo de limpieza
+        var tipo = ""
+        var paso0 = 0;var paso1 = 0;var paso2 = 0;var paso3 = 0;var paso4 = 0;
+        var paso5 = 0;var paso6 = 0;var paso7 = 0;var paso8 = 0;
 
         val bundle = intent.extras//Obtiene todos los datos del bundle
         if(bundle != null){
-            rCentro = "${bundle.getString("centro")}"//Datos del centro
-            rServicio = "${bundle.getString("servicio")}"//Datos del servicio
-            rPabellon = "${bundle.getString("pabellon")}"//Datos del servicio
-            rDepartamento = "${bundle.getString("departamento")}"//Datos del servicio
-            rFecha = "${bundle.getString("fecha")}"//Datos de la fecha
-            rHoraIni = "${bundle.getString("horaInicio")}"//Datos de la hora de inicio
-            rHoraFin = "${bundle.getString("horaFin")}"//Datos de la hora de fin
-            per = "${bundle.getString("periodo")}"//Datos del periodo
-            ses = "${bundle.getString("sesion")}"//Datos de la sesión
-            observ = "${bundle.getString("observados")}"//Datos de los observados
-            catProf = "${bundle.getString("categoria")}"//Datos de los observados
-            subcat = "${bundle.getString("subcategoria")}"//Datos de los observados
+            centro = "${bundle.getString("centro")}"//Datos del centro
+            servicio = "${bundle.getString("servicio")}"//Datos del servicio
+            pabellon = "${bundle.getString("pabellon")}"//Datos del servicio
+            departamento = "${bundle.getString("departamento")}"//Datos del servicio
+            fecha = "${bundle.getString("fecha")}"//Datos de la fecha
+            horaInicio = "${bundle.getString("horaInicio")}"//Datos de la hora de inicio
+            horaFin = "${bundle.getString("horaFin")}"//Datos de la hora de fin
+            intervencion = "${bundle.getString("periodo")}"//Datos del periodo
+            sesion = "${bundle.getString("sesion")}"//Datos de la sesión
+            observados = "${bundle.getString("observados")}"//Datos de los observados
+            pais = "${bundle.getString("pais")}"//Datos del país
+            provincia = "${bundle.getString("provincia")}"//Datos de la provincia
+            categoriaProfesional = "${bundle.getString("categoria")}"//Datos de la categoría profesional
+            subcat = "${bundle.getString("subcategoria")}"//Datos de la subcategoría
+            indicacion = "${bundle.getString("indicacion")}"//Datos de la indicación
+            tipo = "${bundle.getString("tipo")}"//Datos del tipo
         }
 
 
         //Botones básicos
-        bGrabarFM = findViewById(R.id.bGrabarFM)
-        bVolverFM = findViewById(R.id.bVolverFM)
-        bSiguienteFM = findViewById(R.id.bSiguienteFM)//Botón oculto
-        bSiguienteFM.isEnabled = false//Botón deshabilitado
-        bSiguienteFM.isClickable = false//Botón deshabilitado
+        botonGrabar = findViewById(R.id.bGrabarFM)
+        botonVolver = findViewById(R.id.bVolverFM)
+        botonSiguiente = findViewById(R.id.bSiguienteFM)//Botón oculto
+        botonSiguiente.isEnabled = false//Botón deshabilitado
+        botonSiguiente.isClickable = false//Botón deshabilitado
 
         //Botones de acción
-        fm1a = findViewById<ImageButton>(R.id.fm1a)
-        fm1b = findViewById<ImageButton>(R.id.fm1b)
+        fm0 = findViewById<ImageButton>(R.id.fm0)
+        fm1 = findViewById<ImageButton>(R.id.fm1)
         fm2 = findViewById<ImageButton>(R.id.fm2)
         fm3 = findViewById<ImageButton>(R.id.fm3)
         fm4 = findViewById<ImageButton>(R.id.fm4)
@@ -133,10 +148,10 @@ class FM : AppCompatActivity(), LifecycleOwner {
         fm7 = findViewById<ImageButton>(R.id.fm7)
         fm8 = findViewById<ImageButton>(R.id.fm8)
         //Los botones de acción hasta que no se le da a iniciar el proceso están deshabilitados
-        fm1a.isEnabled = false
-        fm1a.isClickable = false
-        fm1b.isEnabled = false
-        fm1b.isClickable = false
+        fm0.isEnabled = false
+        fm0.isClickable = false
+        fm1.isEnabled = false
+        fm1.isClickable = false
         fm2.isEnabled = false
         fm2.isClickable = false
         fm3.isEnabled = false
@@ -153,14 +168,14 @@ class FM : AppCompatActivity(), LifecycleOwner {
         fm8.isClickable = false
 
         //Funcionalidad de los botones de acción
-        binding.fm1a.setOnClickListener {
-            fm1a.isClickable = false
-            fm1a.isEnabled = false
+        binding.fm0.setOnClickListener {
+            fm0.isClickable = false
+            fm0.isEnabled = false
             mostrarHoraPulsadaFM("Paso 1a")
         }
-        binding.fm1b.setOnClickListener {
-            fm1b.isClickable = false
-            fm1b.isEnabled = false
+        binding.fm1.setOnClickListener {
+            fm1.isClickable = false
+            fm1.isEnabled = false
             mostrarHoraPulsadaFM("Paso 1b")
         }
         binding.fm2.setOnClickListener {
@@ -201,56 +216,101 @@ class FM : AppCompatActivity(), LifecycleOwner {
         }
 
         //Funcionalidad del botón de Grabar vídeo
-        bGrabarFM.setOnClickListener {
-            contarTiempoFM()
-            bSiguienteFM.alpha = 1.0f//Activa el botón de siguiente que está oculto
-            bSiguienteFM.isEnabled = true//Botón habilitado
-            bSiguienteFM.isClickable = true//Botón habilitado
-            horaComienzoFM = "$hora:$minuto:$segundo"
-            auxFM = hora*3600 + minuto*60 + segundo
+        botonGrabar.setOnClickListener {
+            botonSiguiente.alpha = 1.0f
+            botonSiguiente.isEnabled = true
+            botonSiguiente.isClickable = true
+            //Activa los botones de acción al iniciar el proceso
+            fm0.isEnabled = true
+            fm0.isClickable = true
+            fm1.isEnabled = true
+            fm1.isClickable = true
+            fm2.isEnabled = true
+            fm2.isClickable = true
+            fm3.isEnabled = true
+            fm3.isClickable = true
+            fm4.isEnabled = true
+            fm4.isClickable = true
+            fm5.isEnabled = true
+            fm5.isClickable = true
+            fm6.isEnabled = true
+            fm6.isClickable = true
+            fm7.isEnabled = true
+            fm7.isClickable = true
+            fm8.isEnabled = true
+            fm8.isClickable = true
+
+            contBoton++
+            if(contBoton%2==1){
+                countDownTimer = object : CountDownTimer(120000,1000){
+                    override fun onTick(millisUntilFinished: Long) {
+                        tempFM.alpha = 1.0f
+                        contadorTiempo++
+                        tempFM.setText(""+contadorTiempo)
+                        if(contadorTiempo>40)
+                            tempFM.setTextColor(Color.parseColor("#FF00FF0A"))
+                    }
+
+                    override fun onFinish() {
+                        tempFM.setText("Tiempo máximo de Higiene "+contadorTiempo)
+                    }
+
+                }.start()
+            }else{
+                botonGrabar.setImageResource(R.mipmap.ic_grabar256)//Vuelve al icono original de grabar
+                countDownTimer.cancel()//Para el contador
+            }
             Toast.makeText(this, "Se ha iniciado la grabación, $horaComienzoFM", Toast.LENGTH_SHORT)
         }
 
         //Funcionalidad del botón de Volver atrás
-        bVolverFM.setOnClickListener {
+        botonVolver.setOnClickListener {
             val intent = Intent(this, Grabar::class.java)
             //Envío de datos a la pantalla siguiente
             val bundle = Bundle()
-            bundle.putString("centro", rCentro)
-            bundle.putString("servicio", rServicio)
-            bundle.putString("pabellon", rPabellon)
-            bundle.putString("departamento", rDepartamento)
-            bundle.putString("periodo",per)
-            bundle.putString("sesion",ses)
-            bundle.putString("observados",observ)
-            bundle.putString("fecha", rFecha)
-            bundle.putString("horaInicio",rHoraIni)
-            bundle.putString("horaFin",rHoraFin)
-            bundle.putString("categoria",catProf)
+            bundle.putString("centro", centro)
+            bundle.putString("servicio", servicio)
+            bundle.putString("pabellon", pabellon)
+            bundle.putString("departamento", departamento)
+            bundle.putString("periodo",intervencion)
+            bundle.putString("sesion",sesion)
+            bundle.putString("observados",observados)
+            bundle.putString("fecha", fecha)
+            bundle.putString("horaInicio",horaInicio)
+            bundle.putString("horaFin",horaFin)
+            bundle.putString("categoria",categoriaProfesional)
             bundle.putString("subcategoria",subcat)
             bundle.putString("indicacion",indicacion)
+            bundle.putString("pais",pais)
+            bundle.putString("provincia",provincia)
             intent.putExtras(bundle)
             startActivity(intent)
         }
 
         //Funcionalidad del botón siguiente
-        bSiguienteFM.setOnClickListener {
-            val intent = Intent(this, resumenFM::class.java)
+        botonSiguiente.setOnClickListener {
+            val intent = Intent(this, resumenHM::class.java)
             //Envío de datos a la pantalla siguiente
             val bundle = Bundle()
-            bundle.putString("centro", rCentro)
-            bundle.putString("servicio", rServicio)
-            bundle.putString("pabellon", rPabellon)
-            bundle.putString("departamento", rDepartamento)
-            bundle.putString("periodo",per)
-            bundle.putString("sesion",ses)
-            bundle.putString("observados",observ)
-            bundle.putString("fecha", rFecha)
-            bundle.putString("horaInicio",rHoraIni)
-            bundle.putString("horaFin",rHoraFin)
-            bundle.putString("categoria",catProf)
+            bundle.putString("centro", centro)
+            bundle.putString("servicio", servicio)
+            bundle.putString("pabellon", pabellon)
+            bundle.putString("departamento", departamento)
+            bundle.putString("periodo",intervencion)
+            bundle.putString("sesion",sesion)
+            bundle.putString("observados",observados)
+            bundle.putString("fecha", fecha)
+            bundle.putString("horaInicio",horaInicio)
+            bundle.putString("horaFin",horaFin)
+            bundle.putString("categoria",categoriaProfesional)
             bundle.putString("subcategoria",subcat)
             bundle.putString("indicacion",indicacion)
+            bundle.putString("tipo",tipo)
+            bundle.putString("pais",pais)
+            bundle.putString("provincia",provincia)
+            bundle.putString("paso0",paso0.toString());bundle.putString("paso1",paso1.toString());bundle.putString("paso2",paso2.toString());
+            bundle.putString("paso3",paso3.toString());bundle.putString("paso4",paso4.toString());bundle.putString("paso5",paso5.toString());
+            bundle.putString("paso6",paso6.toString());bundle.putString("paso7",paso7.toString());bundle.putString("paso8",paso8.toString());
             intent.putExtras(bundle)
             startActivity(intent)
         }
@@ -260,10 +320,10 @@ class FM : AppCompatActivity(), LifecycleOwner {
 
     private fun contarTiempoFM() {
         //Los botones de acción se activan al iniciar el proceso están deshabilitados
-        fm1a.isEnabled = true
-        fm1a.isClickable = true
-        fm1b.isEnabled = true
-        fm1b.isClickable = true
+        fm0.isEnabled = true
+        fm0.isClickable = true
+        fm1.isEnabled = true
+        fm1.isClickable = true
         fm2.isEnabled = true
         fm2.isClickable = true
         fm3.isEnabled = true
@@ -332,7 +392,7 @@ class FM : AppCompatActivity(), LifecycleOwner {
         }
         tempFM.text = tiempoTotalFM.toString()
         tempFM.alpha = 1.0f
-        bSiguienteFM.alpha = 1.0f
+        botonSiguiente.alpha = 1.0f
     }
 
     private fun mostrarHoraPulsadaFM(paso: String) {

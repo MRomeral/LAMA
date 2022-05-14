@@ -4,9 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 
 
 class Grabar : AppCompatActivity() {
@@ -31,7 +29,7 @@ class Grabar : AppCompatActivity() {
         //Spinner de Categoría profesional
         val categorias = resources.getStringArray(R.array.categoriasProfesionales)
         val spCategorias = findViewById<Spinner>(R.id.spCatProf)
-        var categoria = ""
+        var categoriaProfesional = ""
         var subcat = ""
 
         if(spCategorias != null){
@@ -41,7 +39,7 @@ class Grabar : AppCompatActivity() {
             spCategorias.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     val text : String = parent?.getItemAtPosition(position).toString()
-                    categoria = categorias[position]
+                    categoriaProfesional = categorias[position]
                     if(position == 1){
                         val subEnf = resources.getStringArray(R.array.subEnfermera)
                         val spSubcat = findViewById<Spinner>(R.id.spSubcat)
@@ -167,52 +165,61 @@ class Grabar : AppCompatActivity() {
         }
 
         //Datos que pasamos por el bundle
-        var rCentro = ""
-        var rServicio = ""
-        var rPabellon = ""
-        var rDepartamento = ""
-        var per = ""
-        var ses = ""
-        var observ = ""
-        var rFecha = ""
-        var rHoraIni = ""
-        var rHoraFin = ""
+        var centro = ""
+        var servicio = ""
+        var pabellon = ""
+        var departamento = ""
+        var intervencion = ""
+        var sesion = ""
+        var observados = ""
+        var fecha = ""
+        var horaInicio = ""
+        var horaFin = ""
+        var pais = ""
+        var provincia = ""
+        var tipo = ""
 
         val bundle = intent.extras//Obtiene todos los datos del bundle
         if(bundle != null){
-            rCentro = "${bundle.getString("centro")}"//Datos del centro
-            rServicio = "${bundle.getString("servicio")}"//Datos del servicio
-            rPabellon = "${bundle.getString("pabellon")}"//Datos del servicio
-            rDepartamento = "${bundle.getString("departamento")}"//Datos del servicio
-            rFecha = "${bundle.getString("fecha")}"//Datos de la fecha
-            rHoraIni = "${bundle.getString("horaInicio")}"//Datos de la hora de inicio
-            rHoraFin = "${bundle.getString("horaFin")}"//Datos de la hora de fin
-            per = "${bundle.getString("periodo")}"//Datos del periodo
-            ses = "${bundle.getString("sesion")}"//Datos de la sesión
-            observ = "${bundle.getString("observados")}"//Datos de los observados
+            centro = "${bundle.getString("centro")}"//Datos del centro
+            servicio = "${bundle.getString("servicio")}"//Datos del servicio
+            pabellon = "${bundle.getString("pabellon")}"//Datos del servicio
+            departamento = "${bundle.getString("departamento")}"//Datos del servicio
+            fecha = "${bundle.getString("fecha")}"//Datos de la fecha
+            horaInicio = "${bundle.getString("horaInicio")}"//Datos de la hora de inicio
+            horaFin = "${bundle.getString("horaFin")}"//Datos de la hora de fin
+            intervencion = "${bundle.getString("periodo")}"//Datos del periodo
+            sesion = "${bundle.getString("sesion")}"//Datos de la sesión
+            observados = "${bundle.getString("observados")}"//Datos de los observados
+            pais = "${bundle.getString("pais")}"
+            provincia = "${bundle.getString("provincia")}"
         }
 
         //Acciones asociadas a los botones
         //Envía a la función de FM
         bAlcohol.setOnClickListener{
-            if(categoria.isNotEmpty() && subcat.isNotEmpty() && indicacion.isNotEmpty()){
+            if(categoriaProfesional.isNotEmpty() && subcat.isNotEmpty() && indicacion.isNotEmpty()){
                 val intent = Intent(this,FM::class.java)
-                var mensaje = "Categoría profesional: " + categoria.toString() + ", "
+                var mensaje = "Categoría profesional: " + categoriaProfesional.toString() + ", "
+                tipo = "FM"
                 //Envío de datos a la pantalla siguiente
                 val bundle = Bundle()
-                bundle.putString("centro", rCentro)
-                bundle.putString("servicio", rServicio)
-                bundle.putString("pabellon", rPabellon)
-                bundle.putString("departamento", rDepartamento)
-                bundle.putString("periodo",per)
-                bundle.putString("sesion",ses)
-                bundle.putString("observados",observ)
-                bundle.putString("fecha", rFecha)
-                bundle.putString("horaInicio",rHoraIni)
-                bundle.putString("horaFin",rHoraFin)
-                bundle.putString("categoria",categoria)
+                bundle.putString("centro", centro)
+                bundle.putString("servicio", servicio)
+                bundle.putString("pabellon", pabellon)
+                bundle.putString("departamento", departamento)
+                bundle.putString("periodo",intervencion)
+                bundle.putString("sesion",sesion)
+                bundle.putString("observados",observados)
+                bundle.putString("fecha", fecha)
+                bundle.putString("horaInicio",horaInicio)
+                bundle.putString("horaFin",horaFin)
+                bundle.putString("categoria",categoriaProfesional)
                 bundle.putString("subcategoria",subcat)
                 bundle.putString("indicacion",indicacion)
+                bundle.putString("pais",pais)
+                bundle.putString("provincia",provincia)
+                bundle.putString("tipo",tipo)
                 intent.putExtras(bundle)
 
                 startActivity(intent)//Manda a la siguiente pantalla
@@ -225,24 +232,28 @@ class Grabar : AppCompatActivity() {
 
         //Envía a la función de LM
         bJabon.setOnClickListener{
-            if(categoria.isNotEmpty() && subcat.isNotEmpty() && indicacion.isNotEmpty()){
+            if(categoriaProfesional.isNotEmpty() && subcat.isNotEmpty() && indicacion.isNotEmpty()){
                 val intent = Intent(this,LM::class.java)
-                var mensaje = "Categoría profesional: " + categoria.toString() + ", "
+                var mensaje = "Categoría profesional: " + categoriaProfesional.toString() + ", "
+                tipo = "LM"
                 //Envío de datos a la pantalla siguiente
                 val bundle = Bundle()
-                bundle.putString("centro", rCentro)
-                bundle.putString("servicio", rServicio)
-                bundle.putString("pabellon", rPabellon)
-                bundle.putString("departamento", rDepartamento)
-                bundle.putString("periodo",per)
-                bundle.putString("sesion",ses)
-                bundle.putString("observados",observ)
-                bundle.putString("fecha", rFecha)
-                bundle.putString("horaInicio",rHoraIni)
-                bundle.putString("horaFin",rHoraFin)
-                bundle.putString("categoria",categoria)
+                bundle.putString("centro", centro)
+                bundle.putString("servicio", servicio)
+                bundle.putString("pabellon", pabellon)
+                bundle.putString("departamento", departamento)
+                bundle.putString("periodo",intervencion)
+                bundle.putString("sesion",sesion)
+                bundle.putString("observados",observados)
+                bundle.putString("fecha", fecha)
+                bundle.putString("horaInicio",horaInicio)
+                bundle.putString("horaFin",horaFin)
+                bundle.putString("categoria",categoriaProfesional)
                 bundle.putString("subcategoria",subcat)
                 bundle.putString("indicacion",indicacion)
+                bundle.putString("pais",pais)
+                bundle.putString("provincia",provincia)
+                bundle.putString("tipo",tipo)
                 intent.putExtras(bundle)
 
                 startActivity(intent)//Manda a la siguiente pantalla
@@ -254,24 +265,28 @@ class Grabar : AppCompatActivity() {
 
         //Envía a la función de Guantes
         bGuantes.setOnClickListener{
-            if(categoria.isNotEmpty() && subcat.isNotEmpty() && indicacion.isNotEmpty()){
-                val intent = Intent(this,Guantes::class.java)
-                var mensaje = "Categoría profesional: " + categoria.toString() + ", "
+            if(categoriaProfesional.isNotEmpty() && subcat.isNotEmpty() && indicacion.isNotEmpty()){
+                val intent = Intent(this,resumenHM::class.java)
+                var mensaje = "Categoría profesional: " + categoriaProfesional.toString() + ", "
+                tipo = "Guantes"
                 //Envío de datos a la pantalla siguiente
                 val bundle = Bundle()
-                bundle.putString("centro", rCentro)
-                bundle.putString("servicio", rServicio)
-                bundle.putString("pabellon", rPabellon)
-                bundle.putString("departamento", rDepartamento)
-                bundle.putString("periodo",per)
-                bundle.putString("sesion",ses)
-                bundle.putString("observados",observ)
-                bundle.putString("fecha", rFecha)
-                bundle.putString("horaInicio",rHoraIni)
-                bundle.putString("horaFin",rHoraFin)
-                bundle.putString("categoria",categoria)
+                bundle.putString("centro", centro)
+                bundle.putString("servicio", servicio)
+                bundle.putString("pabellon", pabellon)
+                bundle.putString("departamento", departamento)
+                bundle.putString("periodo",intervencion)
+                bundle.putString("sesion",sesion)
+                bundle.putString("observados",observados)
+                bundle.putString("fecha", fecha)
+                bundle.putString("horaInicio",horaInicio)
+                bundle.putString("horaFin",horaFin)
+                bundle.putString("categoria",categoriaProfesional)
                 bundle.putString("subcategoria",subcat)
                 bundle.putString("indicacion",indicacion)
+                bundle.putString("pais",pais)
+                bundle.putString("provincia",provincia)
+                bundle.putString("tipo",tipo)
                 intent.putExtras(bundle)
 
                 startActivity(intent)//Manda a la siguiente pantalla
@@ -283,24 +298,28 @@ class Grabar : AppCompatActivity() {
 
         //Envía a la función de Omisión
         bOmision.setOnClickListener{
-            if(categoria.isNotEmpty() && subcat.isNotEmpty() && indicacion.isNotEmpty()){
-                var intent = Intent(this,OmisionHM::class.java)
-                var mensaje = "Categoría profesional: " + categoria.toString() + ", "
+            if(categoriaProfesional.isNotEmpty() && subcat.isNotEmpty() && indicacion.isNotEmpty()){
+                var intent = Intent(this,resumenHM::class.java)
+                var mensaje = "Categoría profesional: " + categoriaProfesional.toString() + ", "
+                tipo = "Omisión"
                 //Envío de datos a la pantalla siguiente
                 val bundle = Bundle()
-                bundle.putString("centro", rCentro)
-                bundle.putString("servicio", rServicio)
-                bundle.putString("pabellon", rPabellon)
-                bundle.putString("departamento", rDepartamento)
-                bundle.putString("periodo",per)
-                bundle.putString("sesion",ses)
-                bundle.putString("observados",observ)
-                bundle.putString("fecha", rFecha)
-                bundle.putString("horaInicio",rHoraIni)
-                bundle.putString("horaFin",rHoraFin)
-                bundle.putString("categoria",categoria)
+                bundle.putString("centro", centro)
+                bundle.putString("servicio", servicio)
+                bundle.putString("pabellon", pabellon)
+                bundle.putString("departamento", departamento)
+                bundle.putString("periodo",intervencion)
+                bundle.putString("sesion",sesion)
+                bundle.putString("observados",observados)
+                bundle.putString("fecha", fecha)
+                bundle.putString("horaInicio",horaInicio)
+                bundle.putString("horaFin",horaFin)
+                bundle.putString("categoria",categoriaProfesional)
                 bundle.putString("subcategoria",subcat)
                 bundle.putString("indicacion",indicacion)
+                bundle.putString("pais",pais)
+                bundle.putString("provincia",provincia)
+                bundle.putString("tipo",tipo)
                 intent.putExtras(bundle)
 
                 startActivity(intent)//Manda a la siguiente pantalla

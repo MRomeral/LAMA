@@ -19,7 +19,7 @@
     </androidx.camera.view.PreviewView>
 
     <ImageButton
-        android:id="@+id/fm1a"
+        android:id="@+id/fm0"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="100dp"
@@ -34,7 +34,7 @@
         android:layout_height="100dp"
         android:background="@null"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fm1a"
+        app:layout_constraintTop_toBottomOf="@+id/fm0"
         app:srcCompat="@mipmap/ic_lm2" />
 
     <ImageButton
@@ -65,7 +65,7 @@
         app:srcCompat="@mipmap/ic_lm5" />
 
     <ImageButton
-        android:id="@+id/fm1b"
+        android:id="@+id/fm1"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="100dp"
@@ -80,7 +80,7 @@
         android:layout_height="100dp"
         android:background="@null"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fm1b"
+        app:layout_constraintTop_toBottomOf="@+id/fm1"
         app:srcCompat="@mipmap/ic_lm8" />
 
     <ImageButton

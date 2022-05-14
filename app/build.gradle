@@ -34,6 +34,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    namespace 'com.example.lavadomanos'
 }
 
 dependencies {
@@ -64,4 +65,7 @@ dependencies {
     implementation 'com.itextpdf:itextg:5.5.10'
     //Librería para crear el .csv con los datos de cada limpieza
     implementation 'org.apache.commons:commons-csv:1.5'
+    //Librería para hacer pdfs
+    implementation 'com.itextpdf:itextg:5.5.10'
+    implementation 'com.karumi:dexter:5.0.0'
 }
