@@ -295,6 +295,7 @@ class LM : AppCompatActivity(){
 
             lm0.isClickable = false
             lm0.isEnabled = false
+            takePhoto()
             paso0 = contadorTiempo.toString()
             Toast.makeText(this, "Paso: 0, Instante: $paso0", Toast.LENGTH_SHORT).show()
         }
@@ -302,42 +303,49 @@ class LM : AppCompatActivity(){
             takePhoto()
             lm1.isClickable = false
             lm1.isEnabled = false
+            takePhoto()
             paso1 = contadorTiempo.toString()
             Toast.makeText(this, "Paso: 1, Instante: $paso1", Toast.LENGTH_SHORT).show()
         }
         binding.lm2.setOnClickListener {
             lm2.isClickable = false
             lm2.isEnabled = false
+            takePhoto()
             paso2 = contadorTiempo.toString()
             Toast.makeText(this, "Paso: 2, Instante: $paso2", Toast.LENGTH_SHORT).show()
         }
         binding.lm3.setOnClickListener {
             lm3.isClickable = false
             lm3.isEnabled = false
+            takePhoto()
             paso3 = contadorTiempo.toString()
             Toast.makeText(this, "Paso: 3, Instante: $paso3", Toast.LENGTH_SHORT).show()
         }
         binding.lm4.setOnClickListener {
             lm4.isClickable = false
             lm4.isEnabled = false
+            takePhoto()
             paso4 = contadorTiempo.toString()
             Toast.makeText(this,"Paso: 4, Instante: $paso4", Toast.LENGTH_SHORT).show()
         }
         binding.lm5.setOnClickListener {
             lm5.isClickable = false
             lm5.isEnabled = false
+            takePhoto()
             paso5 = contadorTiempo.toString()
             Toast.makeText(this, "Paso: 5, Instante: $paso5", Toast.LENGTH_SHORT).show()
         }
         binding.lm6.setOnClickListener {
             lm6.isClickable = false
             lm6.isEnabled = false
+            takePhoto()
             paso6 = contadorTiempo.toString()
             Toast.makeText(this, "Paso: 6, Instante: $paso6", Toast.LENGTH_SHORT).show()
         }
         binding.lm7.setOnClickListener {
             lm7.isClickable = false
             lm7.isEnabled = false
+            takePhoto()
             paso7 = contadorTiempo.toString()
             Toast.makeText(this, "Paso: 7, Instante: $paso7", Toast.LENGTH_SHORT).show()
         }
@@ -350,22 +358,24 @@ class LM : AppCompatActivity(){
         binding.lm9.setOnClickListener {
             lm9.isClickable = false
             lm9.isEnabled = false
+            takePhoto()
             paso9 = contadorTiempo.toString()
             Toast.makeText(this, "Paso: 9, Instante: $paso9", Toast.LENGTH_SHORT).show()
         }
         binding.lm10.setOnClickListener {
             lm10.isClickable = false
             lm10.isEnabled = false
+            takePhoto()
             paso10 = contadorTiempo.toString()
             Toast.makeText(this, "Paso: 10, Instante: $paso10", Toast.LENGTH_SHORT).show()
         }
         binding.lm11.setOnClickListener {
             lm11.isClickable = false
             lm11.isEnabled = false
+            takePhoto()
             paso11 = contadorTiempo.toString()
             Toast.makeText(this, "Paso: 11, Instante: $paso11", Toast.LENGTH_SHORT).show()
             countDownTimer.cancel()
-            //mostrarTiempoHigieneLM()
         }
     }
 

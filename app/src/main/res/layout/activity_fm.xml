@@ -19,14 +19,14 @@
     </androidx.camera.view.PreviewView>
 
     <ImageButton
-        android:id="@+id/fm0"
+        android:id="@+id/fm1a"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="100dp"
         android:background="@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_lm1" />
+        app:srcCompat="@mipmap/ic_fm1a" />
 
     <ImageButton
         android:id="@+id/fm2"
@@ -34,8 +34,8 @@
         android:layout_height="100dp"
         android:background="@null"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fm0"
-        app:srcCompat="@mipmap/ic_lm2" />
+        app:layout_constraintTop_toBottomOf="@+id/fm1a"
+        app:srcCompat="@mipmap/ic_fm2" />
 
     <ImageButton
         android:id="@+id/fm3"
@@ -44,7 +44,7 @@
         android:background="@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fm2"
-        app:srcCompat="@mipmap/ic_lm3" />
+        app:srcCompat="@mipmap/ic_fm3" />
 
     <ImageButton
         android:id="@+id/fm4"
@@ -53,7 +53,7 @@
         android:background="@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fm3"
-        app:srcCompat="@mipmap/ic_lm4" />
+        app:srcCompat="@mipmap/ic_fm4" />
 
     <ImageButton
         android:id="@+id/fm5"
@@ -62,17 +62,7 @@
         android:background="@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fm4"
-        app:srcCompat="@mipmap/ic_lm5" />
-
-    <ImageButton
-        android:id="@+id/fm1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="100dp"
-        android:background="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_lm7" />
+        app:srcCompat="@mipmap/ic_fm5" />
 
     <ImageButton
         android:id="@+id/fm6"
@@ -80,8 +70,18 @@
         android:layout_height="100dp"
         android:background="@null"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fm1"
-        app:srcCompat="@mipmap/ic_lm8" />
+        app:layout_constraintTop_toBottomOf="@id/fm1b"
+        app:srcCompat="@mipmap/ic_fm6" />
+
+    <ImageButton
+        android:id="@+id/fm1b"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="100dp"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_fm1b" />
 
     <ImageButton
         android:id="@+id/fm7"
@@ -90,7 +90,7 @@
         android:background="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fm6"
-        app:srcCompat="@mipmap/ic_lm9" />
+        app:srcCompat="@mipmap/ic_fm7" />
 
     <ImageButton
         android:id="@+id/fm8"
@@ -99,7 +99,7 @@
         android:background="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fm7"
-        app:srcCompat="@mipmap/ic_lm10" />
+        app:srcCompat="@mipmap/ic_fm8" />
 
     <ImageButton
         android:id="@+id/bGrabarFM"
